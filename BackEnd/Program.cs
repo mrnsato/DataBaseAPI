@@ -25,8 +25,55 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+var tecnologias = new List<Tecnologia>();
+var aplicacoes = new List<Aplicacoes>();
 
 app.UseCors("PermitirTudo");
+
+
+// Frontend - Endpoints Minimal API
+app.MapPost("/aplicacao", (Aplicacoes aplicacao) => {
+    aplicacoes.Add(aplicacao); // 🔥 Salvando aplicação
+    return Results.Ok("Aplicação cadastrada!");
+});
+
+app.MapPost("/tecnologia", (Tecnologia tecnologia) =>
+{
+    tecnologias.Add(tecnologia); // 🔥 Salvando tecnologia
+    return Results.Ok("Tecnologia cadastrada!");
+});
+
+//Frotend - CRUD Minimal API
+app.MapPut("/tecnologia/{id}", (int id, Tecnologia tecnologia) => {
+    var item = tecnologias.FirstOrDefault(t => t.Id == id);
+    if (item == null) return Results.NotFound();
+    item.Nome = tecnologia.Nome;
+    return Results.Ok(item);
+});
+
+app.MapDelete("/tecnologia/{id}", (int id) => {
+    var item = tecnologias.FirstOrDefault(t => t.Id == id);
+    if (item == null) return Results.NotFound();
+    tecnologias.Remove(item);
+    return Results.Ok("Tecnologia deletada!");
+});
+
+app.MapPut("/aplicacao/{id}", (int id, Aplicacoes aplicacao) => {
+    var item = aplicacoes.FirstOrDefault(a => a.Id == id);
+    if (item == null) return Results.NotFound();
+    item.Nome = aplicacao.Nome;
+    return Results.Ok(item);
+});
+
+app.MapDelete("/aplicacao/{id}", (int id) => {
+    var item = aplicacoes.FirstOrDefault(a => a.Id == id);
+    if (item == null) return Results.NotFound();
+    aplicacoes.Remove(item);
+    return Results.Ok("Aplicação deletada!");
+});
+
+
+
 
 // Endpoints Minimal API para Aplicacao
 app.MapPost("/aplicacoes", async (Aplicacoes aplicacao, AppDbContext db) =>

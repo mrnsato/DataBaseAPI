@@ -2,14 +2,17 @@ import React from "react";
 import AplicacoesList from "../components/AplicacoesList";
 import TecnologiaList from "../components/TecnologiaList";
 import Formulario from "../components/Formulario";
+import "./Home.css"; // 🔥 Arquivo de estilos
+
 
 const Home = () => {
   return (
-    <div>
-      <h1>Gestão de Aplicações e Tecnologias</h1>
+    <div className="container">
       <Formulario />
-      <AplicacoesList />
-      <TecnologiaList />
+      <div className="tabelas">
+        <AplicacoesList />
+        <TecnologiaList />
+      </div>
     </div>
   );
 };

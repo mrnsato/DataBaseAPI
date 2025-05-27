@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import api from "../services/api";
 
 const Formulario = () => {
-  const [tipo, setTipo] = useState("aplicacao"); // Alternar entre Aplicação e Tecnologia
-  const [nome, setNome] = useState("");
+  const [nomeAplicacao, setNomeAplicacao] = useState("");
+  const [nomeTecnologia, setNomeTecnologia] = useState("");
+  const [tipo, setTipo] = useState("aplicacao"); // Alterna entre Aplicação e Tecnologia
+  const [nome, setNome] = useState(""); // Para armazenar o nome do item a ser cadastrado
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post(`/${tipo}`, { nome }); // Envia para aplicação ou tecnologia conforme o tipo
+      if (tipo === "aplicacao") {
+        await api.post("http://localhost:5115/aplicacoes", { nome: nomeAplicacao });
+      } else {
+        await api.post("http://localhost:5115/tecnologia", { nome: nomeTecnologia });
+      }
       alert("Cadastrado com sucesso!");
-      setNome(""); // Limpa o campo após o cadastro
+      setNomeAplicacao("");
+      setNomeTecnologia("");
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
     }
@@ -27,9 +34,9 @@ const Formulario = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          placeholder={tipo === "aplicacao" ? "Nome da Aplicação" : "Nome da Tecnologia"}
+          value={tipo === "aplicacao" ? nomeAplicacao : nomeTecnologia}
+          onChange={(e) => tipo === "aplicacao" ? setNomeAplicacao(e.target.value) : setNomeTecnologia(e.target.value)}
         />
         <button type="submit">Cadastrar</button>
       </form>
