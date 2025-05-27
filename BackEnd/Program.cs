@@ -5,19 +5,10 @@ using AplicacaoTecnologiaAPI.Data;
 using TecnologiaAPI;
 using AplicacaoAPI;
 using AplicacaoTecnologiaAPI.Entities;
-using OpenAIService;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddScoped<IAService>();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("PermitirTudo",
-        policy => policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-});
 
 // Configurar conexão com o banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -123,26 +114,8 @@ app.MapDelete("/aplicacao-tecnologia/{aplicacaoId}/{tecnologiaId}", async (int a
 });
 
 
-// Definição das rotas
-app.MapGet("/", () => "API rodando!");
-app.MapPost("/ia/perguntar", async (HttpContext context, IAService iaService) =>
-{
-    var request = await context.Request.ReadFromJsonAsync<PerguntaRequest>();
-    if (request == null || string.IsNullOrWhiteSpace(request.Pergunta))
-    {
-        return Results.BadRequest("Erro: A pergunta está vazia ou inválida.");
-    }
-
-    var resposta = await iaService.GerarResposta(request.Pergunta);
-    return Results.Ok(resposta);
-});
 
 
 app.Run();
 
-// Classe para deserializar o JSON recebido
-public class PerguntaRequest
-{
-    public required string Pergunta { get; set; }
-}
 
