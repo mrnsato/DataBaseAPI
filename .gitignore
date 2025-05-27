@@ -1,0 +1,14 @@
+# Ignorar arquivos de ambiente com chaves API
+.env
+config/*.json
+config/*.yaml
+
+# Ignorar credenciais específicas
+BackEnd/Services/OpenAIService.cs
+
+# Ignorar arquivos comuns de build e dependências
+node_modules/
+bin/
+obj/
+.vscode/
+.idea/

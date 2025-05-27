@@ -145,6 +145,7 @@
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.csproj.CoreCompileInputs.cache
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.MvcApplicationPartsAssemblyInfo.cs
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.MvcApplicationPartsAssemblyInfo.cache
+/home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.sourcelink.json
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/scopedcss/bundle/DataBaseAPI.styles.css
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/staticwebassets.build.json
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/staticwebassets.build.json.cache
@@ -156,4 +157,3 @@
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.pdb
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.genruntimeconfig.cache
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/ref/DataBaseAPI.dll
-/home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.sourcelink.json
