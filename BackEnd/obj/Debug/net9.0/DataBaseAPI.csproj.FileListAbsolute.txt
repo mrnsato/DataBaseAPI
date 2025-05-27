@@ -156,3 +156,4 @@
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.pdb
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.genruntimeconfig.cache
 /home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/ref/DataBaseAPI.dll
+/home/melsantos/DataBaseAPI/DataBaseAPI/BackEnd/obj/Debug/net9.0/DataBaseAPI.sourcelink.json
