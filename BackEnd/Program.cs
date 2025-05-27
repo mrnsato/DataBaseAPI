@@ -24,13 +24,9 @@ builder.Services.AddCors(options =>
                         .AllowAnyHeader());
 });
 
-
-
 var app = builder.Build();
 
-
-
-
+app.UseCors("PermitirTudo");
 
 // Endpoints Minimal API para Aplicacao
 app.MapPost("/aplicacoes", async (Aplicacoes aplicacao, AppDbContext db) =>
