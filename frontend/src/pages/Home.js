@@ -2,8 +2,9 @@ import React from "react";
 import AplicacoesList from "../components/AplicacoesList";
 import TecnologiaList from "../components/TecnologiaList";
 import Formulario from "../components/Formulario";
-import Chatbot from "../components/Chatbot"; // ✅ Importa o Chatbot
-import "./Home.css"; // 🔥 Arquivo de estilos
+import Chatbot from "../components/Chatbot";
+import AplicacoesTecnologias from "../components/AplicacoesTecnologias"; // ✅ Importa a lista
+import "./Home.css";
 
 const Home = () => {
   return (
@@ -14,7 +15,9 @@ const Home = () => {
         <TecnologiaList />
       </div>
 
-      {/* 🔥 Adiciona o Chatbot abaixo das tabelas */}
+      {/* 🔥 Exibe Aplicações e suas Tecnologias */}
+      <AplicacoesTecnologias />
+
       <div className="chatbot-container">
         <Chatbot />
       </div>

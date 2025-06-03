@@ -188,6 +188,26 @@ app.MapPost("/ia/perguntar", async (HttpContext context, IAService iaService) =>
     return Results.Ok(resposta);
 });
 
+//Endpoints para exibir Aplicacao_Tecnologia
+app.MapGet("/aplicacoes-com-tecnologias", async (AppDbContext db) =>
+{
+    var resultado = await db.Aplicacoes
+        .OrderBy(a => a.Nome)
+        .Select(a => new
+        {
+            Aplicacao = a.Nome,
+            Tecnologias = db.Aplicacao_Tecnologia
+                .Where(at => at.AplicacaoId == a.Id)
+                .Select(at => at.Tecnologia.Nome)
+                .OrderBy(t => t)
+                .ToList()
+        })
+        .ToListAsync();
+
+    return Results.Ok(resultado);
+});
+
+
 app.Run();
 
 // Classe para deserializar o JSON recebido
