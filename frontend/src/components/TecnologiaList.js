@@ -21,7 +21,7 @@ const TecnologiaList = () => {
 
   const deletarTecnologia = async (id) => {
     try {
-      await api.delete(`http://localhost:5115/tecnologia/${id}`); // 🔥 Rota DELETE
+      await api.delete(`http://localhost:5115/tecnologia/remove/${id}`); // 🔥 Rota DELETE
       buscarTecnologias(); // Atualiza a lista
     } catch (error) {
       console.error("Erro ao deletar tecnologia:", error);
@@ -35,7 +35,7 @@ const TecnologiaList = () => {
 
   const atualizarTecnologia = async (id) => {
     try {
-      await api.put(`http://localhost:5115/tecnologia/${id}`, { nome: novoNome }); // 🔥 Rota PUT
+      await api.put(`/tecnologia/update/${id}`, { nome: novoNome }); // 🔥 Rota PUT
       setEditando(null);
       setNovoNome("");
       buscarTecnologias();

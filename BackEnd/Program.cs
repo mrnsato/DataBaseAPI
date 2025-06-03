@@ -6,7 +6,7 @@ using TecnologiaAPI;
 using AplicacaoAPI;
 using AplicacaoTecnologiaAPI.Entities;
 using OpenAIService;
-
+using System.Net;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Configurar conexão com o banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<IAService>();
+builder.Services.AddHttpClient<IAService>();
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddCors(options =>
 {
@@ -23,6 +26,8 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod()
                         .AllowAnyHeader());
 });
+
+
 
 var app = builder.Build();
 var tecnologias = new List<Tecnologia>();
@@ -37,7 +42,7 @@ app.MapPost("/aplicacao", (Aplicacoes aplicacao) => {
     return Results.Ok("Aplicação cadastrada!");
 });
 
-app.MapPost("/tecnologia", (Tecnologia tecnologia) =>
+app.MapPost("/tecnologia/inmemory", (Tecnologia tecnologia) =>
 {
     tecnologias.Add(tecnologia); // 🔥 Salvando tecnologia
     return Results.Ok("Tecnologia cadastrada!");
@@ -121,7 +126,7 @@ app.MapPost("/tecnologia", async (Tecnologia tecnologia, AppDbContext db) =>
     return Results.Created($"/tecnologia/{tecnologia.Id}", tecnologia);
 });
 
-app.MapPut("/tecnologia/{id}", async (int id, Tecnologia inputTecnologia, AppDbContext db) =>
+app.MapPut("/tecnologia/update/{id}", async (int id, Tecnologia inputTecnologia, AppDbContext db) =>
 {
     var tecnologia = await db.Tecnologia.FindAsync(id);
 
@@ -134,7 +139,7 @@ app.MapPut("/tecnologia/{id}", async (int id, Tecnologia inputTecnologia, AppDbC
     return Results.Ok(tecnologia);
 });
 
-app.MapDelete("/tecnologia/{id}", async (int id, AppDbContext db) =>
+app.MapDelete("/tecnologia/remove/{id}", async (int id, AppDbContext db) =>
 {
     var tecnologia = await db.Tecnologia.FindAsync(id);
 
@@ -169,7 +174,7 @@ app.MapDelete("/aplicacao-tecnologia/{aplicacaoId}/{tecnologiaId}", async (int a
 });
 
 
-// Definição das rotas
+// Definição das rotas AI API
 app.MapGet("/", () => "API rodando!");
 app.MapPost("/ia/perguntar", async (HttpContext context, IAService iaService) =>
 {
@@ -182,7 +187,6 @@ app.MapPost("/ia/perguntar", async (HttpContext context, IAService iaService) =>
     var resposta = await iaService.GerarResposta(request.Pergunta);
     return Results.Ok(resposta);
 });
-
 
 app.Run();
 

@@ -21,7 +21,7 @@ const AplicacoesList = () => {
 
   const deletarAplicacao = async (id) => {
     try {
-      await api.delete(`http://localhost:5115/aplicacoes${id}`); // 🔥 Rota DELETE
+      await api.delete(`http://localhost:5115/aplicacoes/${id}`); // 🔥 Rota DELETE
       buscarAplicacoes();
     } catch (error) {
       console.error("Erro ao deletar aplicação:", error);
@@ -35,7 +35,7 @@ const AplicacoesList = () => {
 
   const atualizarAplicacao = async (id) => {
     try {
-      await api.put(`http://localhost:5115/aplicacoes${id}`, { nome: novoNome }); // 🔥 Rota PUT
+      await api.put(`http://localhost:5115/aplicacoes/${id}`, { nome: novoNome }); // 🔥 Rota PUT
       setEditando(null);
       setNovoNome("");
       buscarAplicacoes();

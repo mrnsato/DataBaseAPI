@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5115/aplicacao-tecnologia", // Substitua pelo endpoint da sua API
+  baseURL: "http://localhost:5115",
 });
 
 export default api;
