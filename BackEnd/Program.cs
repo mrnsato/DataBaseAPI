@@ -5,7 +5,6 @@ using AplicacaoTecnologiaAPI.Data;
 using TecnologiaAPI;
 using AplicacaoAPI;
 using AplicacaoTecnologiaAPI.Entities;
-using OpenAIService;
 using System.Net;
 
 
@@ -15,8 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IAService>();
-builder.Services.AddHttpClient<IAService>();
 builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddCors(options =>
@@ -176,17 +173,7 @@ app.MapDelete("/aplicacao-tecnologia/{aplicacaoId}/{tecnologiaId}", async (int a
 
 // Definição das rotas AI API
 app.MapGet("/", () => "API rodando!");
-app.MapPost("/ia/perguntar", async (HttpContext context, IAService iaService) =>
-{
-    var request = await context.Request.ReadFromJsonAsync<PerguntaRequest>();
-    if (request == null || string.IsNullOrWhiteSpace(request.Pergunta))
-    {
-        return Results.BadRequest("Erro: A pergunta está vazia ou inválida.");
-    }
 
-    var resposta = await iaService.GerarResposta(request.Pergunta);
-    return Results.Ok(resposta);
-});
 
 //Endpoints para exibir Aplicacao_Tecnologia
 app.MapGet("/aplicacoes-com-tecnologias", async (AppDbContext db) =>
@@ -209,12 +196,6 @@ app.MapGet("/aplicacoes-com-tecnologias", async (AppDbContext db) =>
 
 
 app.Run();
-
-// Classe para deserializar o JSON recebido
-public class PerguntaRequest
-{
-    public required string Pergunta { get; set; }
-}
 
 
 
