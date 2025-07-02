@@ -1,11 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
 using AplicacaoTecnologiaAPI.Data;
 using TecnologiaAPI;
 using AplicacaoAPI;
 using AplicacaoTecnologiaAPI.Entities;
-using System.Net;
+using System.Text.Json;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddCors(options =>
 {
